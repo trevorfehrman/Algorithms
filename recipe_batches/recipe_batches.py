@@ -3,21 +3,34 @@
 import math
 
 
-def recipe_batches(recipe, ingredients):
-    count = 0
+# def recipe_batches(recipe, ingredients):
+#     count = 0
 
-    while True:
-        for key, value in recipe.items():
-            if key in ingredients:
-                if ingredients[key] - recipe[key] < 0:
-                    print(count)
-                    return count
-                ingredients[key] -= recipe[key]
-            else:
-                return count
-        count += 1
+#     while True:
+#         for key in recipe.items():
+#             if key in ingredients:
+#                 if ingredients[key] - recipe[key] < 0:
+#                     return count
+#                 ingredients[key] -= recipe[key]
+#             else:
+#                 return count
+#         count += 1
 
 # 0, 1, 2, 100
+
+
+# better
+
+def recipe_batches(recipe, ingredients):
+    count = math.inf
+    for i in recipe:
+        if i in ingredients:
+            if (ingredients[i] // recipe[i]) < count:
+                count = ingredients[i] // recipe[i]
+        else:
+            return 0
+
+    return count
 
 
 recipe_batches({'milk': 100, 'flour': 4, 'sugar': 10, 'butter': 5}, {
